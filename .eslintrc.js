@@ -24,5 +24,10 @@ module.exports = {
   "rules": {
     "react/jsx-filename-extension": 0,
     "function-paren-newline": 0,
+    "semi": false
+  },
+  "globals": {
+    "test": true,
+    "expect": true,
   }
 };

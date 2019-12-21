@@ -9,7 +9,7 @@ export default class Counter extends Component {
       const count = this.state.count;
       return (
         <div className="hello">
-          <button>
+          <button data-testid="counter-button">
             {count}
           </button>
         </div>

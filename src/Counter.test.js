@@ -7,7 +7,7 @@ afterEach(cleanup)
 test('<Counter />', () => {
     const { debug, getByTestId } = render(<Counter />)
 
-    debug()
+    // debug()
     const counterButton = getByTestId('counter-button')
 
     // Assert that the counter-button is a button

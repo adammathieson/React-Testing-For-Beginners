@@ -4,16 +4,30 @@ import MovieForm from './MovieForm'
 
 afterEach(cleanup)
 
+// Spy function; fake function
 const onSubmit = jest.fn()
 
 test('<MovieForm>', () => {
     const {
-        queryByTestId, getByText
+        queryByTestId, getByText, getByLabelText
     } = render(
         <MovieForm submitForm={onSubmit}/>,
     )
     expect(queryByTestId('movie-form')).toBeTruthy()
+
+    // Might not work with this syntax
+    // getByLabelText('Text').value = 'hello'
+    // fireEvent.change(getByLabelText('Text'))
+
+    fireEvent.change(getByLabelText('Text'), {
+        target: {value: 'hello'},
+    })
+
     fireEvent.click(getByText('Submit'))
 
+
     expect(onSubmit).toHaveBeenCalledTimes(1)
+    expect(onSubmit).toHaveBeenCalledWith({
+        text: 'hello',
+    })
 })

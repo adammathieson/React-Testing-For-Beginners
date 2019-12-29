@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 
 export class MovieForm extends Component {
-    state = ''
+    state = {
+        text: ''
+    }
 
     render() {
         const { submitForm } = this.props
         const { text } = this.state
+
         return (
             <div>
                 <form 
@@ -15,7 +18,13 @@ export class MovieForm extends Component {
                     })
                     }
                 >
-                    <input type="text" />
+                    <label htmlFor="text">
+                        Text
+                        <input 
+                            type="text" 
+                            id="text"
+                            onChange={e => this.setState({text: e.target.value})}/>
+                    </label>
                     <button>Submit</button>
                 </form>
             </div>

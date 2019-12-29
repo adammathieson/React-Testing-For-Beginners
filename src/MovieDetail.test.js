@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, cleanup } from 'react-testing-library'
+import { render, cleanup, waitForElement } from 'react-testing-library'
 
 import MovieDetail from './MovieDetail'
 
@@ -19,16 +19,18 @@ const match = {
 // Spy on the console.error
 console.error = jest.fn()
 
-test('<MovieDetail />', () => {
+const movie = {
+    id: 'hi',
+    title: 'Level up rules',
+}
 
-    fetch.mockResponseOnce(JSON.stringify({
-        movie: {
-            id: 'hi',
-            title: 'Level up rules',
-        },
-    }),
-    )
+test('<MovieDetail />', async () => {
 
-    const { debug } = render(<MovieDetail match={match} />)
-    debug()
+    fetch.mockResponseOnce(JSON.stringify(movie))
+
+    const { getByTestId } = render(<MovieDetail match={match} />)
+    await waitForElement(() => getByTestId('movie-title'))
+
+    expect(getByTestId('movie-title').textContent).toBe(movie.title)
+
 })
